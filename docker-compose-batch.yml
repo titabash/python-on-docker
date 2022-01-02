@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  local_batch:
+    build: ./docker/local/
+    container_name: 'local_batch'
+    working_dir: '/service/'
+    tty: true
+    volumes:
+      - ./src:/service/
+      - ./tests:/service/tests
+    ports:
+      - 8000:8000
+    env_file:
+      - ./env/common.env
+      - ./env/local.env
+    networks:
+      - default
+      - shared-network
+    command: >
+      bash -c '
+        pip install -r requirements.txt
+        while :; do sleep 10; done
+      '
+  gcp_batch:
+    build:
+      context: ./docker/gcp/
+      args:
+        BUILD_MODE: batch
+    container_name: 'gcp_batch'
+    working_dir: '/service/'
+    tty: true
+    volumes:
+      - ./src:/service/src
+    ports:
+      - 8010:8080
+    env_file:
+      - ./env/common.env
+      - ./env/gcp.env
+    networks:
+      - default
+      - shared-network
+    command: >
+      bash -c '
+        pip install -r src/requirements.txt -t ./python_modules/
+        pip install -r src/requirements.txt
+        functions-framework --target=handler --signature-type=event --source gcp_batch.py --debug
+      '
+  aws_batch:
+    build:
+      context: ./docker/aws/
+      args:
+        BUILD_MODE: batch
+    container_name: 'aws_batch'
+    working_dir: '/var/task'
+    tty: true
+    ports:
+      - 8020:8080
+    volumes:
+      - ./src:/var/task/src
+      - ~/.aws:/root/.aws
+    env_file:
+      - ./env/common.env
+      - ./env/aws.env
+    networks:
+      - default
+      - shared-network
+    entrypoint: >
+      bash -c '
+      pip install -r src/requirements.txt -t ./python_modules/ &&
+      /lambda-entrypoint.sh aws_batch.handler
+      '
+networks:
+  shared-network:
+    external: true
