@@ -4,4 +4,4 @@ import batch
 
 
 def handler(event, context):
-    return batch.mainCmd(event)
+    return batch.main_cmd(event)

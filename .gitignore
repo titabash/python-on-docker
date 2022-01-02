@@ -2,6 +2,7 @@ __pycache__
 env.yml
 .pytest_cache
 
+project/src/log/*
 docker/databases/mongo/data/configdb/*
 docker/databases/mongo/data/db/*
 docker/databases/redis/data/*

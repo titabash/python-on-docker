@@ -7,6 +7,8 @@ RUN pip install pytest
 RUN apt-get update
 RUN apt-get install -y libpq-dev
 RUN apt-get install -y gcc
+COPY ./project/requirements.txt ./
+RUN pip install -r requirements.txt
 
 EXPOSE 8000
 

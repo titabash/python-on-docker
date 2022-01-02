@@ -1,7 +1,7 @@
 FROM python:3.8-slim
 WORKDIR /service
 ARG BUILD_MODE
-COPY gcp_${BUILD_MODE}.py /service/
+COPY ./docker/gcp/gcp_${BUILD_MODE}.py /service/
 
 RUN apt-get update
 RUN apt-get -y install locales && \
@@ -19,6 +19,8 @@ RUN pip install --upgrade pip
 # google cloud
 RUN pip install google-cloud
 RUN pip install functions-framework
+COPY ./project/requirements.txt ./
+RUN pip install -r requirements.txt
 
 EXPOSE 8010
 

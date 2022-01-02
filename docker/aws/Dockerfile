@@ -15,9 +15,11 @@ RUN yum install -y postgresql-devel
 WORKDIR ${LAMBDA_TASK_ROOT}
 
 ARG BUILD_MODE
-COPY aws_${BUILD_MODE}.py ${LAMBDA_TASK_ROOT}
+COPY ./docker/aws/aws_${BUILD_MODE}.py ${LAMBDA_TASK_ROOT}
 
 RUN mkdir ./site-packages
 RUN pip install --upgrade pip
 RUN pip install awslambdaric
 RUN pip install aws-wsgi
+COPY ./project/requirements.txt ./
+RUN pip install -r requirements.txt

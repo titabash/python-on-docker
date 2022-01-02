@@ -2,14 +2,15 @@ version: '3.8'
 services:
   gcp_api_be:
     build:
-      context: ./docker/gcp/
+      context: .
+      dockerfile: ./docker/gcp/Dockerfile
       args:
         BUILD_MODE: api
     container_name: 'gcp_api_be'
     working_dir: '/service/'
     tty: true
     volumes:
-      - ./src:/service/src
+      - ./project/src:/service/src
     ports:
       - 8010:8080
     networks:
@@ -20,13 +21,12 @@ services:
       - ./env/gcp.env
     command: >
       sh -c '
-        pip install -r src/requirements.txt -t ./site-packages/
-        pip install -r src/requirements.txt
         functions-framework --target gcp_app --source gcp_api.py --debug
       '
   aws_api_be:
     build:
-      context: ./docker/aws/
+      context: .
+      dockerfile: ./docker/aws/Dockerfile
       args:
         BUILD_MODE: api
     container_name: 'aws_api_be'
@@ -35,7 +35,7 @@ services:
     ports:
       - 8020:8080
     volumes:
-      - ./src:/var/task/src
+      - ./project/src:/var/task/src
       - ~/.aws:/root/.aws
     networks:
       - default
@@ -45,19 +45,19 @@ services:
       - ./env/aws.env
     entrypoint: >
       bash -c '
-      pip install -r src/requirements.txt &&
       /lambda-entrypoint.sh aws_api.handler
       '
   local_api_be:
     build:
-      context: ./docker/local/
+      context: .
+      dockerfile: ./docker/local/Dockerfile
       args:
         BUILD_MODE: api
     container_name: 'local_api_be'
     working_dir: '/service/'
     tty: true
     volumes:
-      - ./src:/service
+      - ./project/src:/service/src
     ports:
       - 8000:8000
     networks:
@@ -68,8 +68,7 @@ services:
       - ./env/local.env
     command: >
       bash -c '
-        pip install -r requirements.txt
-        python api.py
+        python src/api.py
       '
 networks:
   shared-network:

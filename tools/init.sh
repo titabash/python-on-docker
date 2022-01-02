@@ -1,11 +1,10 @@
-if [ -e ./src ]; then
-  rm -rf ./src
+CURRENT_DIR = $(pwd)
+if [ -e ./project ]; then
+  rm -rf ./project
 fi
-if [ -e ./tests ]; then
-  rm -rf ./tests
-fi
-mkdir ./src
-git clone --filter=blob:none --sparse https://github.com/titabash/python-clean-architecture-template.git ./
-git sparse-checkout set src
-git sparse-checkout set tests
-rm -rf ./src/.git
+
+git clone https://github.com/titabash/python-clean-architecture-template.git ./project
+cd ./project
+rm -rf .git
+rm -rf .gitignore
+rm -rf README.md
