@@ -1,5 +1,5 @@
 # python-on-docker
-
+このプロジェクトをForkして活用してください。
 ## 環境構築
 1. Install docker, docker-compose
 2. Install tmux
@@ -67,7 +67,7 @@ Run batch on local GCP(Cloud Functions)<br>
 
 GCP
 ```
-$ docker exec -it gcp_function_python
+$ docker exec -it gcp_batch or gcp_api_be
 $ gcloud app create --project=[YOUR_PROJECT_ID] # まだプロジェクトを作成していない場合は実行
 $ gcloud app deploy --project [YOUR_PROJECT_ID]
 ```
