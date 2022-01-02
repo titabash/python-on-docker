@@ -1,9 +1,5 @@
 # python-on-docker
 
-ローカル環境でCloud Functionsを実行するための環境。
-
-HTTPトリガーにのみ対応。
-
 ## 環境構築
 1. Install docker, docker-compose
 2. Install tmux
