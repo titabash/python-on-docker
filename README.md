@@ -1,26 +1,33 @@
-※こちらのリポジトリを流用させていただいております。
-https://github.com/yyuuiikk/cloud_functions_python
-
-# Cloud Functions, AWS Lambda Python実行環境
+# python-on-docker
 
 ローカル環境でCloud Functionsを実行するための環境。
 
 HTTPトリガーにのみ対応。
 
-# コンテナの作成と起動
+## 環境構築
+1. Install docker, docker-compose
+2. Install tmux
+
+## コンテナの作成と起動
 
 ```
-$ docker-compose up -d
+$ make init
+$ make start
 ```
 
-# コンテナの終了と削除
+## コンテナの停止
 ```
-$ docker-compose down --rmi all --volumes --remove-orphans
+$ make stop
+```
+
+## コンテナの終了と削除
+```
+$ make remove
 ```
 
 ## サンプルプログラムの実行
+### バックエンドAPI
 webサーバが起動するので、ターミナルの別ウインドウを開きcurlを実行する。
-
 ローカル
 ```
 $ curl http://127.0.0.1:8000/
@@ -51,6 +58,15 @@ $ curl -XPOST "http://localhost:8020/2015-03-31/functions/function/invocations" 
     "isBase64Encoded": false}'
 ```
 
+### バッチ
+Run batch on local<br>
+```docker exec -it local_batch_python python src/batch.py -o '{"hoge": "fuga"}'```<br>
+Run batch on local AWS<br>
+```curl -XPOST "http://localhost:8020/2015-03-31/functions/function/invocations" -d '{"hoge": "fuga"}'```<br>
+Run batch on local GCP(Cloud Functions)<br>
+```curl -XPOST http://localhost:8010/ -H 'Content-Type:application/json; charset=utf-8' -d '{"data": {"hoge": "fuga"}}'```<br>
+
+
 ## デプロイ
 
 GCP
@@ -62,16 +78,3 @@ $ gcloud app deploy --project [YOUR_PROJECT_ID]
 
 # その他
 - Lambdaに関しては今後Zappaに対応するかもしれません。
-
-## How to Develop
-1. Fork this repository to your github project
-2. clone your repository<br>
-   ```git clone <your repo>```<br>
-3. add this repository to your remote upstream<br>
-   ```git remote add upstream git@github.com:titabash/multicloud-python-batch.git```<br>
-   You are ready to develop your batch.
-## How to merge upstream change
-4. fetch the upstream repo<br>
-   ```git fetch upstream```<br>
-5. merge the upstream change<br>
-   ```git merge upstream/main```<br>
