@@ -1,11 +1,9 @@
-CURRENT_DIR = $(pwd)
 if [ -e ./project ]; then
   read -n1 -p "Are you sure you want to permanently delete the project? (y/N): " yn
   if [[ $yn = [yY] ]]; then
     rm -rf ./project
-    echo "Project has been deleted."
+    echo "\nProject has been deleted."
   else
-    echo abort
     exit 0
   fi
 fi
