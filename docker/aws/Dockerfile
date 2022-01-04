@@ -1,5 +1,6 @@
-FROM amazon/aws-lambda-python
+FROM centos/python-38-centos7:latest
 
+USER root
 RUN yum install -y unzip
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 RUN unzip awscliv2.zip
@@ -12,14 +13,18 @@ RUN yum install -y postgresql-libs
 RUN yum install -y postgresql-devel
 
 
-WORKDIR ${LAMBDA_TASK_ROOT}
+WORKDIR /service
 
 ARG BUILD_MODE
-COPY ./docker/aws/aws_${BUILD_MODE}.py ${LAMBDA_TASK_ROOT}
+COPY ./docker/aws/aws_${BUILD_MODE}.py /service
+COPY ./docker/aws/zappa_settings.json /service
 
-RUN mkdir ./site-packages
-RUN pip install --upgrade pip
-RUN pip install awslambdaric
-RUN pip install aws-wsgi
+RUN python -m venv venv
+RUN venv/bin/pip install --upgrade pip
+RUN venv/bin/pip install awslambdaric
+RUN venv/bin/pip install aws-wsgi
+RUN venv/bin/pip install zappa
 COPY ./project/requirements.txt ./
-RUN pip install -r requirements.txt
+RUN venv/bin/pip install -r requirements.txt
+
+CMD ["zappa deploy dev"]

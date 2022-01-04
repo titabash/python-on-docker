@@ -1,9 +1,9 @@
-import awsgi
+import os
 from controller import create_app
-
 
 app = create_app()
 
 
-def handler(event, context):
-    return awsgi.response(app, event, context)
+port = int(os.environ.get('PORT', 8080))
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=port, debug=True)

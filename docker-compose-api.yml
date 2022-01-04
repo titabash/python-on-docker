@@ -30,12 +30,12 @@ services:
       args:
         BUILD_MODE: api
     container_name: 'aws_api_be'
-    working_dir: '/var/task'
+    working_dir: '/service'
     tty: true
     ports:
       - 8020:8080
     volumes:
-      - ./project/src:/var/task/src
+      - ./project/src:/service/src
       - ~/.aws:/root/.aws
     networks:
       - default
@@ -45,7 +45,7 @@ services:
       - ./env/aws.env
     entrypoint: >
       bash -c '
-      /lambda-entrypoint.sh aws_api.handler
+      venv/bin/python aws_api.py
       '
   local_api_be:
     build:

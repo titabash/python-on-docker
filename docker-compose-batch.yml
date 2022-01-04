@@ -58,7 +58,7 @@ services:
     ports:
       - 8020:8080
     volumes:
-      - ./project/src:/var/task/src
+      - ./project/src:/service/src
       - ~/.aws:/root/.aws
     env_file:
       - ./env/common.env
@@ -68,7 +68,7 @@ services:
       - shared-network
     entrypoint: >
       bash -c '
-      /lambda-entrypoint.sh aws_batch.handler
+      while :; do sleep 10; done
       '
 networks:
   shared-network:
