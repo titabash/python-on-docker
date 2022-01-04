@@ -1,8 +1,9 @@
 NETWORK_NAME = shared-network
 BUILD_MODE = api
+FIX_PYTHON_TEMP = false
 
 init:
-	sh ./tools/init.sh
+	sh ./tools/init.sh $(FIX_PYTHON_TEMP)
 start:
 	@if [ -z "`docker network ls | grep $(NETWORK_NAME)`" ]; then docker network create $(NETWORK_NAME); fi
 	sh ./tools/start.sh $(BUILD_MODE)

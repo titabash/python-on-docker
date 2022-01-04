@@ -9,7 +9,11 @@ if [ -e ./project ]; then
 fi
 
 git clone https://github.com/titabash/python-clean-architecture-template.git ./project
-cd ./project
-rm -rf .git
-rm -rf .gitignore
-rm -rf README.md
+if [[ $1 = true ]]; then
+  echo "Clone the project to maintenace."
+else
+  cd ./project
+  rm -rf .git
+  rm -rf .gitignore
+  rm -rf README.md
+fi
