@@ -102,6 +102,10 @@ gcloud app create --project=[YOUR_PROJECT_ID] # まだプロジェクトを作�
 gcloud app deploy --project [YOUR_PROJECT_ID]
 ```
 
-# その他
+AWS
 
-- Lambdaに関しては今後Zappaに対応するかもしれません。
+```
+zappa deploy dev
+```
+
+# その他
