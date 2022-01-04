@@ -1,6 +1,7 @@
 __pycache__
 env.yml
 .pytest_cache
+.DS_Store
 
 project/src/log/*
 docker/databases/mongo/data/configdb/*
