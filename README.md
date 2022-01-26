@@ -1,6 +1,6 @@
 # python-on-docker
 
-このプロジェクトをForkして活用してください。
+Use this template から新しいリポジトリを作成してください。
 
 ## 環境構築
 
