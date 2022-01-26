@@ -9,7 +9,7 @@ Use this template から新しいリポジトリを作成してください。
 
 ## コンテナの作成と起動
 
-1. 開発するPythonスクリプトのテンプレートを取得する。[python-clean-architecture-template](https://github.com/titabash/python-clean-architecture-template)<br>
+1. git clone --recursive {Template Repositoryから作成したリポジトリ}
 
 ```
 make init
