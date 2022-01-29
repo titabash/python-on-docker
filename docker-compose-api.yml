@@ -1,12 +1,12 @@
 version: '3.8'
 services:
-  gcp_api_be:
+  gcp_api:
     build:
       context: .
       dockerfile: ./docker/gcp/Dockerfile
       args:
         BUILD_MODE: api
-    container_name: 'gcp_api_be'
+    container_name: 'gcp_api'
     working_dir: '/service/'
     tty: true
     volumes:
@@ -23,13 +23,13 @@ services:
       sh -c '
         functions-framework --target gcp_app --source gcp_api.py --debug
       '
-  aws_api_be:
+  aws_api:
     build:
       context: .
       dockerfile: ./docker/aws/Dockerfile
       args:
         BUILD_MODE: api
-    container_name: 'aws_api_be'
+    container_name: 'aws_api'
     working_dir: '/service'
     tty: true
     ports:
@@ -47,13 +47,13 @@ services:
       bash -c '
       venv/bin/python aws_api.py
       '
-  local_api_be:
+  local_api:
     build:
       context: .
       dockerfile: ./docker/local/Dockerfile
       args:
         BUILD_MODE: api
-    container_name: 'local_api_be'
+    container_name: 'local_api'
     working_dir: '/service/'
     tty: true
     volumes:

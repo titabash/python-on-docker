@@ -97,7 +97,7 @@ $ curl -XPOST "http://localhost:8020/2015-03-31/functions/function/invocations" 
 GCP
 
 ```
-docker exec -it gcp_batch or gcp_api_be
+docker exec -it gcp_batch or gcp_api
 gcloud app create --project=[YOUR_PROJECT_ID] # まだプロジェクトを作成していない場合は実行
 gcloud app deploy --project [YOUR_PROJECT_ID]
 ```
