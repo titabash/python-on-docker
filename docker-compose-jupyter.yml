@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  server_jupyter:
+    build:
+      context: .
+      dockerfile: ./docker/jupyter_lab/Dockerfile
+    container_name: 'server_jupyter'
+    working_dir: '/service/notebook'
+    tty: true
+    volumes:
+      - ./notebook:/service/notebook
+    ports:
+      - 8888:8888
+    networks:
+      - default
+      - shared-network
+    env_file:
+      - ./env/common.env
+    command: start-notebook.sh --NotebookApp.token=''
+
+networks:
+  shared-network:
+    external: true
