@@ -5,10 +5,10 @@ services:
       context: .
       dockerfile: ./docker/jupyter_lab/Dockerfile
     container_name: 'server_jupyter'
-    working_dir: '/service/notebook'
+    working_dir: '/notebook'
     tty: true
     volumes:
-      - ./notebook:/service/notebook
+      - ./notebook:/notebook
     ports:
       - 8888:8888
     networks:

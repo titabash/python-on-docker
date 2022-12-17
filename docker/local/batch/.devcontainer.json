@@ -1,0 +1,49 @@
+{
+  "dockerComposeFile": ["../../../docker-compose-api.yml"],
+  "service": "local_batch",
+  "workspaceFolder": "/service",
+  "settings": {
+		"terminal.integrated.profiles.linux": {
+			"bash": {
+				"path": "/bin/bash"
+			}
+		},
+    "debug.inlineValues": true,
+    "debug.internalConsoleOptions": "openOnSessionStart",
+    "debug.openDebug": "openOnSessionStart",
+    "debug.toolBarLocation": "docked",
+    "editor.acceptSuggestionOnCommitCharacter": true,
+    "editor.cursorBlinking": "phase",
+    "editor.dragAndDrop": false,
+    "editor.find.autoFindInSelection": "always",
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "editor.formatOnSave": true,
+    "editor.lineNumbers": "interval",
+    "editor.minimap.maxColumn": 40,
+    "editor.minimap.showSlider": "always",
+    "editor.renderControlCharacters": true,
+    "editor.renderLineHighlight": "all",
+    "editor.renderWhitespace": "boundary",
+    "editor.showFoldingControls": "always",
+		"python.defaultInterpreterPath": "/usr/local/bin/python",
+		"python.languageServer": "Default",
+		"python.linting.enabled": true,
+		"python.linting.pylintEnabled": true,
+		"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
+		"python.formatting.blackPath": "/usr/local/py-utils/bin/black",
+		"python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
+		"python.linting.banditPath": "/usr/local/py-utils/bin/bandit",
+		"python.linting.flake8Path": "/usr/local/py-utils/bin/flake8",
+		"python.linting.mypyPath": "/usr/local/py-utils/bin/mypy",
+		"python.linting.pycodestylePath": "/usr/local/py-utils/bin/pycodestyle",
+		"python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
+		"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint"
+	},
+
+			// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"ms-python.python",
+		"ms-python.vscode-pylance"
+	]
+}

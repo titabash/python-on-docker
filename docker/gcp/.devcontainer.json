@@ -1,9 +1,0 @@
-{
-    "dockerComposeFile": "../../docker-compose-${BUILD_MODE}.yml",
-    "service": "gcp_${BUILD_MODE}",
-    "workspaceFolder": "/service",
-    "extensions": [
-        "ms-python.python",
-        "sdras.night-owl",
-    ]
-}

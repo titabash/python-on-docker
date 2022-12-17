@@ -23,53 +23,6 @@ services:
       bash -c '
         while :; do sleep 10; done
       '
-  gcp_batch:
-    build:
-      context: .
-      dockerfile: ./docker/gcp/Dockerfile
-      args:
-        BUILD_MODE: batch
-    container_name: 'gcp_batch'
-    working_dir: '/service/'
-    tty: true
-    volumes:
-      - ./project/src:/service/src
-    ports:
-      - 8010:8080
-    env_file:
-      - ./env/common.env
-      - ./env/gcp.env
-    networks:
-      - default
-      - shared-network
-    command: >
-      bash -c '
-        functions-framework --target=handler --signature-type=event --source gcp_batch.py --debug
-      '
-  aws_batch:
-    build:
-      context: .
-      dockerfile: ./docker/aws/Dockerfile
-      args:
-        BUILD_MODE: batch
-    container_name: 'aws_batch'
-    working_dir: '/var/task'
-    tty: true
-    ports:
-      - 8020:8080
-    volumes:
-      - ./project/src:/service/src
-      - ~/.aws:/root/.aws
-    env_file:
-      - ./env/common.env
-      - ./env/aws.env
-    networks:
-      - default
-      - shared-network
-    entrypoint: >
-      bash -c '
-      while :; do sleep 10; done
-      '
 networks:
   shared-network:
     external: true

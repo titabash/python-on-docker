@@ -3,6 +3,7 @@ env.yml
 .pytest_cache
 .DS_Store
 
+notebook/*
 project/src/log/*
 docker/databases/mongo/data/configdb/*
 docker/databases/mongo/data/db/*

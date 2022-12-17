@@ -1,52 +1,5 @@
 version: '3.8'
 services:
-  gcp_api:
-    build:
-      context: .
-      dockerfile: ./docker/gcp/Dockerfile
-      args:
-        BUILD_MODE: api
-    container_name: 'gcp_api'
-    working_dir: '/service/'
-    tty: true
-    volumes:
-      - ./project/src:/service/src
-    ports:
-      - 8010:8080
-    networks:
-      - default
-      - shared-network
-    env_file:
-      - ./env/common.env
-      - ./env/gcp.env
-    command: >
-      sh -c '
-        functions-framework --target gcp_app --source gcp_api.py --debug
-      '
-  aws_api:
-    build:
-      context: .
-      dockerfile: ./docker/aws/Dockerfile
-      args:
-        BUILD_MODE: api
-    container_name: 'aws_api'
-    working_dir: '/service'
-    tty: true
-    ports:
-      - 8020:8080
-    volumes:
-      - ./project/src:/service/src
-      - ~/.aws:/root/.aws
-    networks:
-      - default
-      - shared-network
-    env_file:
-      - ./env/common.env
-      - ./env/aws.env
-    entrypoint: >
-      bash -c '
-      venv/bin/python aws_api.py
-      '
   local_api:
     build:
       context: .
