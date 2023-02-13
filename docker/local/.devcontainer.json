@@ -1,13 +1,9 @@
 {
-  "name": "jupyter-dev-container",
-  "dockerComposeFile": ["../../docker-compose-jupyter.yml"],
-  "service": "jupyter",
-  "workspaceFolder": "/notebook",
-  "extensions": [
-    "ms-python.python",
-    "ms-python.vscode-pylance",
-    "ms-toolsai.jupyter"
-  ],
+  "name": "python-dev-container",
+  "dockerComposeFile": ["../../docker-compose.yml"],
+  "service": "local",
+  "workspaceFolder": "/service",
+  "extensions": ["ms-python.python", "ms-python.vscode-pylance"],
   "settings": {
     "[python]": {
       "editor.formatOnType": false,
@@ -16,7 +12,6 @@
     },
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
-    "python.defaultInterpreterPath": "/opt/conda/bin/python",
     // "python.linting.lintOnSave": false,
     "python.formatting.autopep8Path": "autopep8",
     "python.formatting.provider": "autopep8",

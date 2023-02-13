@@ -1,12 +1,10 @@
 version: '3.8'
 services:
-  local_api:
+  local:
     build:
       context: .
       dockerfile: ./docker/local/Dockerfile
-      args:
-        BUILD_MODE: api
-    container_name: 'local_api'
+    container_name: 'local'
     working_dir: '/service/'
     tty: true
     volumes:
@@ -23,6 +21,6 @@ services:
       bash -c '
         python src/api.py
       '
+
 networks:
   shared-network:
-    external: true
