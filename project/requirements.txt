@@ -1,0 +1,13 @@
+Flask
+requests
+PyYAML
+pymongo
+numpy
+scipy
+pandas
+scikit-learn
+dataset
+psycopg2
+sqlalchemy
+autopep8
+flake8
