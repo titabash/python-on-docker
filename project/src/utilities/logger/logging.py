@@ -1,5 +1,7 @@
 import inspect
 import logging
+from logging import StreamHandler, FileHandler, Formatter
+from logging import INFO, DEBUG, NOTSET
 import datetime
 import os
 from functools import wraps
@@ -20,12 +22,22 @@ class CustomFilter(logging.Filter):
         return True
 
 
-def get_logger():
+def logger():
     log_format = '[%(asctime)s] %(levelname)s\t%(filename)s' \
                  ' - %(funcName)s:%(lineno)s -> %(message)s'
     d_today = datetime.date.today()
-    logging.basicConfig(format=log_format, level=logging.INFO,
-                        filename=f'{os.path.dirname(os.path.realpath(__file__))}/../../log/logging_{os.environ["MACHINE_ENV"]}_{d_today}.log')
+    stream_handler = StreamHandler()
+    stream_handler.setLevel(INFO)
+    stream_handler.setFormatter(Formatter(log_format))
+
+    file_handler = FileHandler(
+        f'{os.path.dirname(os.path.realpath(__file__))}/../../log/logging_{os.environ["MACHINE_ENV"]}_{d_today}.log'
+    )
+    file_handler.setLevel(DEBUG)
+    file_handler.setFormatter(
+        Formatter(log_format)
+    )
+    logging.basicConfig(level=NOTSET, handlers=[stream_handler, file_handler])
     logger = logging.getLogger(__name__)
     logger.addFilter(CustomFilter())
     return logger
@@ -54,10 +66,11 @@ def log(logger):
                 return func(*args, **kwargs)
             except Exception as err:
                 # funcのエラーハンドリング
-                logging.error(err, exc_info=True, extra=extra)
-                logging.error(f'[KILLED] {func_name}', extra=extra)
+                logger.error(err, exc_info=True, extra=extra)
+                logger.error(f'[KILLED] {func_name}', extra=extra)
+                raise
             else:
-                logging.info(f'[END] {func_name}', extra=extra)
+                logger.info(f'[END] {func_name}', extra=extra)
 
         return wrapper
     return _decorator

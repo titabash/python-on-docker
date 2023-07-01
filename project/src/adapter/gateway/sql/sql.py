@@ -1,13 +1,11 @@
 import dataset
 import os
-from utilities.logger.logging import log, get_logger
+from domain.repository.hello_repository import HelloRepository
+from utilities.logger.logging import logger
 
-logger = get_logger()
 
+class HelloGateway(HelloRepository):
 
-class SQL():
-
-    @log(logger)
     def __init__(self, dbName, tblName, user=None, pwd=None, dbType='postgresql', port=5432):
         user = user if user is not None else os.environ["SQL_USER"]
         pwd = pwd if pwd is not None else os.environ["SQL_PASS"]
@@ -16,15 +14,12 @@ class SQL():
         self.db.begin()
         self.table = self.db[tblName]  # DB名を設定
 
-    @log(logger)
     def find_one(self, filters={}):
         return self.table.find_one(**filters)
 
-    @log(logger)
     def find(self, filters={}):
         return self.table.find(**filters)
 
-    @log(logger)
     def insert(self, record):
         try:
             result = self.table.insert(record)
@@ -32,10 +27,9 @@ class SQL():
             return result
         except Exception as e:
             self.db.rollback()
-            # logger.error(e)
+            logger.error(e)
             raise e
 
-    @log(logger)
     def update(self, record, filter):
         try:
             result = self.table.update(record, **filter)
@@ -43,10 +37,9 @@ class SQL():
             return result
         except Exception as e:
             self.db.rollback()
-            # logger.error(e)
+            logger.error(e)
             raise e
 
-    @log(logger)
     def delete(self, filter=None):
         try:
             result = self.table.delete(**filter)
@@ -54,12 +47,12 @@ class SQL():
             return result
         except Exception as e:
             self.db.rollback()
-            # logger.error(e)
+            logger.error(e)
             raise e
 
 
 if __name__ == '__main__':
-    sql = SQL(dbName='pgtest', tblName='testtbl')
+    sql = HelloGateway(dbName='pgtest', tblName='testtbl')
 
     print('--------------------Register--------------------')
     result = sql.insert({'name': 'Mike', 'salary': 400000})

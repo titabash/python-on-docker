@@ -1,8 +1,10 @@
 from pymongo import MongoClient
 import os
 
+from domain.repository.hello_repository import HelloRepository
 
-class Mongo():
+
+class HelloGateway(HelloRepository):
 
     def __init__(self, dbName, collectionName, user=None, pwd=None, port=27017):
         self.client = MongoClient(os.environ['MONGO_ENDPOINT'], port)
@@ -47,7 +49,7 @@ class Mongo():
 
 
 if __name__ == '__main__':
-    mongo = Mongo(dbName='test', collectionName='testCollections')
+    mongo = HelloGateway(dbName='test', collectionName='testCollections')
 
     print('--------------------Register--------------------')
     result = mongo.insert({'name': 'Mike', 'salary': 400000})
