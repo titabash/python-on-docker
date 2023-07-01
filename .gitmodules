@@ -1,3 +1,0 @@
-[submodule "project"]
-	path = project
-	url = git@github.com:titabash/python-clean-architecture-template.git

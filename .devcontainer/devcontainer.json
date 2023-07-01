@@ -1,9 +1,19 @@
 {
   "name": "python-dev-container",
-  "dockerComposeFile": ["../../docker-compose.yml"],
+  "dockerComposeFile": [
+    "../docker-compose.yml",
+    "../docker-compose-jupyter.yml"
+  ],
   "service": "local",
   "workspaceFolder": "/service",
-  "extensions": ["ms-python.python", "ms-python.vscode-pylance"],
+  "extensions": [
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-python.flake8",
+    "ms-python.autopep8",
+    "KevinRose.vsc-python-indent",
+    "oderwat.indent-rainbow"
+  ],
   "settings": {
     "[python]": {
       "editor.formatOnType": false,

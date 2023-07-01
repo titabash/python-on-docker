@@ -8,7 +8,7 @@ RUN apt-get update
 RUN apt-get install -y libpq-dev
 RUN apt-get install -y gcc
 COPY ./project/requirements.txt ./
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 EXPOSE 8000
 

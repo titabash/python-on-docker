@@ -5,7 +5,35 @@ Use this template から新しいリポジトリを作成してください。
 ## 環境構築
 
 1. Install docker, docker-compose
-2. Install tmux
+2. Install vscode
+
+## Supabaseの設定
+
+1. Supabaseをインストールをする。(基本的なインフラはSupabaseを利用する)
+
+```
+brew install supabase/tap/supabase
+```
+
+2. (無ければ)Supabaseのアカウントを作成する([Supabase](https://supabase.com/))
+
+3. Supabase cliでログインコマンドを実行する
+
+```
+supabase login
+```
+
+4. Supabaseのローカル環境を起動する
+
+```
+supabase start
+```
+
+止める時は下記(バックアップも作成)
+
+```
+supabase stop --backup
+```
 
 ## コンテナの作成と起動
 
