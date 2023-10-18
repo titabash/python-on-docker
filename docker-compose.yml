@@ -1,11 +1,11 @@
-version: '3.8'
+version: "3.8"
 services:
   local:
     build:
       context: .
       dockerfile: ./docker/local/Dockerfile
-    container_name: 'local'
-    working_dir: '/service/'
+    container_name: "local"
+    working_dir: "/service/"
     tty: true
     volumes:
       - ./project/src:/service/src
@@ -13,10 +13,10 @@ services:
       - 8000:8000
     networks:
       - default
-      - shared-network
+      - python-app-network
     env_file:
       - ./env/common.env
-      - ./env/local.env
+      - ./env/local_app.env
       - ./env/secrets.env
     command: >
       bash -c '
@@ -25,4 +25,4 @@ services:
       '
 
 networks:
-  shared-network:
+  python-app-network:

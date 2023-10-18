@@ -1,19 +1,19 @@
 import sys
 import os
-from adapter.gateway.mongo.hello_gateway import HelloGateway
+from adapter.gateway.hello_gateway import HelloGateway
 
 # from utilities.logger.logging import logger
 from domain.hello import Hello
 
 
-class HelloUsecase():
-
+class HelloUsecase:
     def __init__(self):
         self.hello_repository = HelloGateway()
 
-    def hello(self, event='test') -> Hello:
+    def hello(self, event="test") -> Hello:
         hello = Hello(
-            environment=os.environ["MACHINE_ENV"], py_version=sys.version, event=event)
+            environment=os.environ["MACHINE_ENV"], py_version=sys.version, event=event
+        )
         return hello
 
     def find_all(self):

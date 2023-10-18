@@ -30,5 +30,6 @@
     "python.linting.lintOnSave": true,
     "python.linting.enabled": true,
     "python.formatting.provider": "black"
-  }
+  },
+  "postStartCommand": "supabase start"
 }
