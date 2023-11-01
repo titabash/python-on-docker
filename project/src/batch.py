@@ -6,7 +6,7 @@ Write your module
 Ex. import hoge
 """
 from utilities.logger.logging import log, get_logger
-from controller import hello_controller
+from adapter.controller import hello_controller
 
 logger = get_logger()
 

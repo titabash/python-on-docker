@@ -9,6 +9,6 @@ class CommonFirestoreClient:
         project_id=None,
         collectionName=None,
     ):
-        cred = credentials.Certificate("path/to/serviceAccount.json")
+        cred = credentials.Certificate("/credentials/firebase/serviceAccount.json")
         firebase_admin.initialize_app(cred)
         self.client = firestore_async.client()

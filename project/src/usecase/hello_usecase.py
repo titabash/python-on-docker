@@ -2,13 +2,13 @@ import sys
 import os
 from adapter.gateway.hello_gateway import HelloGateway
 
-# from utilities.logger.logging import logger
 from domain.hello import Hello
 
 
 class HelloUsecase:
     def __init__(self):
         self.hello_repository = HelloGateway()
+        pass
 
     def hello(self, event="test") -> Hello:
         hello = Hello(

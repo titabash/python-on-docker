@@ -11,7 +11,9 @@ docker/databases/mongo/data/configdb/*
 docker/databases/mongo/data/db/*
 docker/databases/redis/data/*
 secrets/*
+credentials/*
 !.gitkeep
+!attention.txt
 
 # Supabase
 .branches

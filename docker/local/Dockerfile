@@ -12,4 +12,6 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 EXPOSE 8000
 
-CMD ["/bin/sh"]
+WORKDIR /service/src
+
+CMD ["uvicorn", "api:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
