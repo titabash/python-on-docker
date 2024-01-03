@@ -12,14 +12,14 @@ logger = get_logger()
 
 
 @log(logger)
-def main_cmd(event={'default': 'value'}):
+def main_cmd(event={"default": "value"}):
     result = hello_controller.main_batch_controller()
     print(result)
     return result
 
 
 @click.command()
-@click.option('--arg', '-o', default='{"data": "test"}')
+@click.option("--arg", "-o", default='{"data": "test"}')
 def main(arg):
     """
     debug on local

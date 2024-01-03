@@ -6,30 +6,34 @@
   ],
   "service": "local",
   "workspaceFolder": "/service",
-  "extensions": [
-    "ms-python.python",
-    "ms-python.vscode-pylance",
-    "ms-python.flake8",
-    "KevinRose.vsc-python-indent",
-    "oderwat.indent-rainbow",
-    "ms-python.black-formatter"
-  ],
-  "settings": {
-    "editor.formatOnType": true,
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true,
-    "editor.insertSpaces": true,
-    "editor.detectIndentation": true,
-    "editor.tabSize": 4,
-    "editor.defaultFormatter": "ms-python.black-formatter",
-
-    "python.pythonPath": "/service",
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": true,
-    "python.linting.flake8Args": ["--max-line-length", "150"],
-    "python.linting.lintOnSave": true,
-    "python.linting.enabled": true,
-    "python.formatting.provider": "black"
-  },
-  "postStartCommand": "supabase start"
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.flake8",
+        "KevinRose.vsc-python-indent",
+        "oderwat.indent-rainbow",
+        "ms-python.black-formatter"
+      ],
+      "settings": {
+        "editor.formatOnType": true,
+        "editor.formatOnPaste": true,
+        "editor.formatOnSave": true,
+        "editor.insertSpaces": true,
+        "editor.detectIndentation": true,
+        "editor.tabSize": 4,
+        "editor.defaultFormatter": null,
+        "python.pythonPath": "/service",
+        "python.linting.pylintEnabled": false,
+        "python.formatting.blackPath": "/usr/local/bin/black",
+        "python.linting.lintOnSave": true,
+        "python.linting.flake8Enabled": true,
+        "python.linting.enabled": true,
+        "python.formatting.provider": "black",
+        "flake8.args": ["--max-line-length=150", "--ignore=E203,W503,W504"],
+        "black-formatter.args": ["--line-length=150"]
+      }
+    }
+  }
 }
